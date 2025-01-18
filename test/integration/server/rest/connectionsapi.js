@@ -1,15 +1,16 @@
 'use strict';
 
-import { json } from 'body-parser';
+import bodyParser from 'body-parser';
+const { json } = bodyParser;
 import express from 'express';
 import fetch from 'node-fetch';
 import tape from 'tape';
 
-import WebRtcConnection from '../../../../lib/server/connections/webrtcconnection.js';
-import WebRtcConnectionManager from '../../../../lib/server/connections/webrtcconnectionmanager.js';
-import connectionsApi from '../../../../lib/server/rest/connectionsapi.js';
+import { WebRtcConnection } from '../../../../lib/server/connections/webrtcconnection.js';
+import { WebRtcConnectionManager } from '../../../../lib/server/connections/webrtcconnectionmanager.js';
+import { connectionsApi } from '../../../../lib/server/rest/connectionsapi.js';
 
-import TestRtcPeerConnection, { peerConnections } from '../../../lib/testrtcpeerconnection.js';
+import { TestRtcPeerConnection } from '../../../lib/testrtcpeerconnection.js';
 
 async function delete_(url) {
   const response = await fetch(url, {
@@ -59,7 +60,7 @@ tape('connectionsApi(app, connectionManager)', (t) => {
 
       const connection1 = await post('http://localhost:3000/v1/connections');
 
-      peerConnections.shift();
+      TestRtcPeerConnection.peerConnections.shift();
 
       t.ok(
         connection1.localDescription,

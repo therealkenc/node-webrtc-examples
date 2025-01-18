@@ -1,13 +1,14 @@
 /* eslint no-process-env:0 */
 'use strict';
 
-import { json } from 'body-parser';
+import bodyParser from 'body-parser';
+const { json } = bodyParser;
 import express from 'express';
 import tape from 'tape';
 
-import ConnectionClient from '../../../lib/client.js';
-import { create } from '../../../lib/server/connections/webrtcconnectionmanager.js';
-import connectionsApi from '../../../lib/server/rest/connectionsapi.js';
+import { ConnectionClient } from '../../../lib/client/index.js';
+import { WebRtcConnectionManager } from '../../../lib/server/connections/webrtcconnectionmanager.js';
+import { connectionsApi } from '../../../lib/server/rest/connectionsapi.js';
 
 tape('ConnectionsClient', (t) => {
   t.test('typical usage', (t) => {
@@ -15,7 +16,7 @@ tape('ConnectionsClient', (t) => {
 
     app.use(json());
 
-    const connectionManager = create({
+    const connectionManager = WebRtcConnectionManager.create({
       beforeOffer(peerConnection) {
         peerConnection.createDataChannel('test');
       },

@@ -1,11 +1,12 @@
 'use strict';
 
 import tape from 'tape';
-import { nonstandard } from 'wrtc';
+import wrtc from '@roamhq/wrtc';
+const { nonstandard } = wrtc;
 const { RTCAudioSink } = nonstandard;
 
-import PitchDetector from '../../../../lib/common/pitchdetector.js';
-import RTCAudioSourceSineWave from '../../../../lib/server/webrtc/rtcaudiosourcesinewave.js';
+import { PitchDetector } from '../../../../lib/common/pitchdetector.js';
+import { RTCAudioSourceSineWave } from '../../../../lib/server/webrtc/rtcaudiosourcesinewave.js';
 
 tape('RTCAudioSinkFrequencyDetector', (t) => {
   t.test('it works', (t) => {

@@ -66,4 +66,4 @@ class TestRtcPeerConnection extends EventEmitter {
 
 TestRtcPeerConnection.peerConnections = [];
 
-export default TestRtcPeerConnection;
+export { TestRtcPeerConnection };

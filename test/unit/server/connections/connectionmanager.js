@@ -2,8 +2,8 @@
 
 import tape from 'tape';
 
-import Connection from '../../../../lib/server/connections/connection.js';
-import ConnectionManager from '../../../../lib/server/connections/connectionmanager.js';
+import { Connection } from '../../../../lib/server/connections/connection.js';
+import { ConnectionManager } from '../../../../lib/server/connections/connectionmanager.js';
 
 tape('ConnectionManager', (t) => {
   t.test('constructor', (t) => {

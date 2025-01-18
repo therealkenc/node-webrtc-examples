@@ -31,4 +31,4 @@ function beforeOffer(peerConnection) {
   };
 }
 
-export default { beforeOffer };
+export { beforeOffer };

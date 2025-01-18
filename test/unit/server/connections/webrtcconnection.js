@@ -1,17 +1,15 @@
 'use strict';
 
 import tape from 'tape';
-
-import WebRtcConnection from '../../../../lib/server/connections/webrtcconnection.js';
-
-import TestRtcPeerConnection, { peerConnections } from '../../../lib/testrtcpeerconnection.js';
+import { WebRtcConnection } from '../../../../lib/server/connections/webrtcconnection.js';
+import { TestRtcPeerConnection } from '../../../lib/testrtcpeerconnection.js';
 
 const ID = 0;
 
 tape('WebRtcConnection', (t) => {
   t.test('constructor', (t) => {
     const connection = new WebRtcConnection(ID, { RTCPeerConnection: TestRtcPeerConnection });
-    peerConnections.shift();
+    TestRtcPeerConnection.peerConnections.shift();
     t.ok(connection instanceof WebRtcConnection, 'it returns an instance of WebRtcConnection');
     connection.close();
     t.end();
@@ -36,7 +34,7 @@ tape('WebRtcConnection', (t) => {
         },
       });
 
-      const peerConnection = peerConnections.shift();
+      const peerConnection = TestRtcPeerConnection.peerConnections.shift();
 
       callbacks[0]();
 
@@ -66,7 +64,7 @@ tape('WebRtcConnection', (t) => {
         },
       });
 
-      const peerConnection = peerConnections.shift();
+      const peerConnection = TestRtcPeerConnection.peerConnections.shift();
 
       const [callback] = callbacks;
       peerConnection.updateIceConnectionState('connected');
@@ -97,7 +95,7 @@ tape('WebRtcConnection', (t) => {
         },
       });
 
-      const peerConnection = peerConnections.shift();
+      const peerConnection = TestRtcPeerConnection.peerConnections.shift();
       peerConnection.updateIceConnectionState('connected');
       peerConnection.updateIceConnectionState('disconnected');
 
@@ -129,7 +127,7 @@ tape('WebRtcConnection', (t) => {
         },
       });
 
-      const peerConnection = peerConnections.shift();
+      const peerConnection = TestRtcPeerConnection.peerConnections.shift();
       peerConnection.updateIceConnectionState('connected');
       peerConnection.updateIceConnectionState('disconnected');
 

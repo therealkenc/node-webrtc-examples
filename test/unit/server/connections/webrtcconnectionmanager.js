@@ -2,8 +2,8 @@
 
 import tape from 'tape';
 
-import Connection from '../../../../lib/server/connections/connection.js';
-import WebRtcConnectionManager from '../../../../lib/server/connections/webrtcconnectionmanager.js';
+import { Connection } from '../../../../lib/server/connections/connection.js';
+import { WebRtcConnectionManager } from '../../../../lib/server/connections/webrtcconnectionmanager.js';
 
 const LOCAL_DESCRIPTION = { type: 'offer', sdp: 'offer' };
 
