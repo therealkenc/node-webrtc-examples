@@ -1,9 +1,9 @@
 'use strict';
 
-const tape = require('tape');
+import tape from 'tape';
 
-const Connection = require('../../../../lib/server/connections/connection');
-const WebRtcConnectionManager = require('../../../../lib/server/connections/webrtcconnectionmanager');
+import Connection from '../../../../lib/server/connections/connection.js';
+import WebRtcConnectionManager from '../../../../lib/server/connections/webrtcconnectionmanager.js';
 
 const LOCAL_DESCRIPTION = { type: 'offer', sdp: 'offer' };
 
@@ -26,23 +26,30 @@ class TestWebRtcConnection extends Connection {
     return {
       ...super.toJSON(),
       localDescription: this.localDescription,
-      remoteDescription: this.remoteDescription
+      remoteDescription: this.remoteDescription,
     };
   }
 }
 
-tape('WebRtcConnectionManager', t => {
-  t.test('constructor', t => {
+tape('WebRtcConnectionManager', (t) => {
+  t.test('constructor', (t) => {
     const connectionManager = new WebRtcConnectionManager();
-    t.ok(connectionManager instanceof WebRtcConnectionManager, 'returns an instance of WebRtcConnectionManager');
+    t.ok(
+      connectionManager instanceof WebRtcConnectionManager,
+      'returns an instance of WebRtcConnectionManager'
+    );
     t.end();
   });
 
-  t.test('.createConnection()', async t => {
+  t.test('.createConnection()', async (t) => {
     const connectionManager = new WebRtcConnectionManager({ Connection: TestWebRtcConnection });
     const connection = await connectionManager.createConnection();
     t.ok(connection instanceof TestWebRtcConnection, 'returns an instance of WebRtcConnection');
-    t.deepEqual(connection.localDescription, LOCAL_DESCRIPTION, 'the WebRtcConnection has its .localDescription set');
+    t.deepEqual(
+      connection.localDescription,
+      LOCAL_DESCRIPTION,
+      'the WebRtcConnection has its .localDescription set'
+    );
     t.end();
   });
 

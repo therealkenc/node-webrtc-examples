@@ -1,10 +1,11 @@
 'use strict';
 
-const { createCanvas, createImageData } = require('canvas');
-const { hsv } = require('color-space');
-const { performance } = require('perf_hooks');
+import { createCanvas, createImageData } from 'canvas';
+import { hsv } from 'color-space';
+import { performance } from 'perf_hooks';
 
-const { RTCVideoSink, RTCVideoSource, i420ToRgba, rgbaToI420 } = require('wrtc').nonstandard;
+import { nonstandard } from 'wrtc';
+const { RTCVideoSink, RTCVideoSource, i420ToRgba, rgbaToI420 } = nonstandard;
 
 const width = 640;
 const height = 480;
@@ -33,10 +34,10 @@ function beforeOffer(peerConnection) {
 
   const interval = setInterval(() => {
     if (lastFrame) {
-      const lastFrameCanvas = createCanvas(lastFrame.width,  lastFrame.height);
+      const lastFrameCanvas = createCanvas(lastFrame.width, lastFrame.height);
       const lastFrameContext = lastFrameCanvas.getContext('2d');
 
-      const rgba = new Uint8ClampedArray(lastFrame.width *  lastFrame.height * 4);
+      const rgba = new Uint8ClampedArray(lastFrame.width * lastFrame.height * 4);
       const rgbaFrame = createImageData(rgba, lastFrame.width, lastFrame.height);
       i420ToRgba(lastFrame, rgbaFrame);
 
@@ -67,7 +68,7 @@ function beforeOffer(peerConnection) {
     const i420Frame = {
       width,
       height,
-      data: new Uint8ClampedArray(1.5 * width * height)
+      data: new Uint8ClampedArray(1.5 * width * height),
     };
     rgbaToI420(rgbaFrame, i420Frame);
     source.onFrame(i420Frame);
@@ -77,7 +78,7 @@ function beforeOffer(peerConnection) {
   // RTCPeerConnection is closed. In the future, we can subscribe to
   // "connectionstatechange" events.
   const { close } = peerConnection;
-  peerConnection.close = function() {
+  peerConnection.close = function () {
     clearInterval(interval);
     sink.stop();
     track.stop();
@@ -85,4 +86,4 @@ function beforeOffer(peerConnection) {
   };
 }
 
-module.exports = { beforeOffer };
+export default { beforeOffer };

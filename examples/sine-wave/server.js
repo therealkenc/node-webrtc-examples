@@ -1,6 +1,6 @@
 'use strict';
 
-const RTCAudioSourceSineWave = require('../../lib/server/webrtc/rtcaudiosourcesinewave');
+import RTCAudioSourceSineWave from '../../lib/server/webrtc/rtcaudiosourcesinewave.js';
 
 function beforeOffer(peerConnection) {
   const source = new RTCAudioSourceSineWave();
@@ -20,7 +20,7 @@ function beforeOffer(peerConnection) {
   // RTCPeerConnection is closed. In the future, we can subscribe to
   // "connectionstatechange" events.
   const { close } = peerConnection;
-  peerConnection.close = function() {
+  peerConnection.close = function () {
     dataChannel.removeEventListener('message', onMessage);
     track.stop();
     source.close();
@@ -28,4 +28,4 @@ function beforeOffer(peerConnection) {
   };
 }
 
-module.exports = { beforeOffer };
+export default { beforeOffer };

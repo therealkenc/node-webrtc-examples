@@ -1,6 +1,6 @@
 'use strict';
 
-const EventEmitter = require('events');
+import EventEmitter from 'events';
 
 const LOCAL_DESCRIPTION = { type: 'offer', sdp: 'offer' };
 
@@ -66,4 +66,4 @@ class TestRtcPeerConnection extends EventEmitter {
 
 TestRtcPeerConnection.peerConnections = [];
 
-module.exports = TestRtcPeerConnection;
+export default TestRtcPeerConnection;

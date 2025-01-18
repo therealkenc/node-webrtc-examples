@@ -1,12 +1,16 @@
 /* global Scope */
 'use strict';
 
-require('Scope/dist/Scope.js');
+import 'Scope/dist/Scope.js';
 
-const createExample = require('../../lib/browser/example');
-const { acquireAudioContext, releaseAudioContext } = require('../../lib/browser/webaudio/refcountedaudiocontext');
+import createExample from '../../lib/browser/example.js';
+import {
+  acquireAudioContext,
+  releaseAudioContext,
+} from '../../lib/browser/webaudio/refcountedaudiocontext.js';
 
-const description = 'This example uses node-webrtc&rsquo;s RTCAudioSource to \
+const description =
+  'This example uses node-webrtc&rsquo;s RTCAudioSource to \
 generate a stereo sine wave server-side. Use the number input to change the \
 panning of the server-generated sine wave. Panning changes are sent to the \
 server using RTCDataChannel.';
@@ -23,7 +27,9 @@ canvases.className = 'grid';
 async function beforeAnswer(peerConnection) {
   const audioContext = acquireAudioContext();
 
-  const remoteStream = new MediaStream(peerConnection.getReceivers().map(receiver => receiver.track));
+  const remoteStream = new MediaStream(
+    peerConnection.getReceivers().map((receiver) => receiver.track)
+  );
 
   const remoteAudio = document.createElement('audio');
   remoteAudio.srcObject = remoteStream;
@@ -67,7 +73,7 @@ async function beforeAnswer(peerConnection) {
   // RTCPeerConnection is closed. In the future, we can subscribe to
   // "connectionstatechange" events.
   const { close } = peerConnection;
-  peerConnection.close = function() {
+  peerConnection.close = function () {
     panningInput.removeEventListener('change', onChange);
     peerConnection.removeEventListener('datachannel', onDataChannel);
 

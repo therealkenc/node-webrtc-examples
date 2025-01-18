@@ -1,8 +1,9 @@
 'use strict';
 
-const createExample = require('../../lib/browser/example');
+import createExample from '../../lib/browser/example.js';
 
-const description = 'This example sends a given amount of data from the client \
+const description =
+  'This example sends a given amount of data from the client \
 over an RTCDataChannel. Upon receipt, node-webrtc responds by sending the data \
 back to the client. \
 Data is chunked into pieces, you can adjust both the chunk size and global \
@@ -26,7 +27,7 @@ function beforeAnswer(peerConnection) {
   let downloadStartTime = 0;
   let downLoadDuration = 0;
   let downloadedBytes = 0;
-  const uploadedBytes = (dataSize.value)*1024*1024;
+  const uploadedBytes = dataSize.value * 1024 * 1024;
 
   function closeDatachannel() {
     if (dataChannel) {
@@ -52,7 +53,7 @@ function beforeAnswer(peerConnection) {
     if (/^#START/.test(data)) {
       downloadStartTime = Date.now();
       const uploadDuration = data.split(' ')[1];
-      const uploadBitRate = uploadedBytes*8/(uploadDuration/1000)/1000000;
+      const uploadBitRate = (uploadedBytes * 8) / (uploadDuration / 1000) / 1000000;
       const text = `Upload &emsp;&emsp;-- total : ${uploadedBytes}, duration : ${uploadDuration} ms, bitrate : ~${uploadBitRate.toFixed(2)} Mbits/s`;
       uploadLabel.innerHTML = text;
       console.log(text);
@@ -62,7 +63,7 @@ function beforeAnswer(peerConnection) {
 
     if (/^#STOP/.test(data)) {
       downLoadDuration = Date.now() - downloadStartTime;
-      const downloadBitRate = downloadedBytes*8/(downLoadDuration/1000)/1000000;
+      const downloadBitRate = (downloadedBytes * 8) / (downLoadDuration / 1000) / 1000000;
       const text = `Download -- total : ${downloadedBytes}, duration : ${downLoadDuration} ms, bitrate : ~${downloadBitRate.toFixed(2)} Mbits/s`;
       downloadLabel.innerHTML = text;
       console.log(text);
@@ -91,7 +92,7 @@ function beforeAnswer(peerConnection) {
       dataChannel.addEventListener('message', onMessage);
 
       const queueStartTime = Date.now();
-      const chunkSizeInBytes = (chunkSize.value)*1024;
+      const chunkSizeInBytes = chunkSize.value * 1024;
       const loops = uploadedBytes / chunkSizeInBytes;
       const rem = uploadedBytes % chunkSizeInBytes;
 
@@ -110,7 +111,7 @@ function beforeAnswer(peerConnection) {
         dataChannel.send('#STOP');
         const queueDuration = Date.now() - queueStartTime;
         console.log(`Queued ${uploadedBytes} bytes in ${queueDuration} ms`);
-      } catch(e) {
+      } catch (e) {
         console.log('Failed to send data over dataChannel :', e);
         peerConnection.close();
         closeDatachannel();
@@ -121,10 +122,10 @@ function beforeAnswer(peerConnection) {
   }
 
   function onConnectionStateChange(event) {
-    switch(peerConnection.connectionState) {
-      case "disconnected":
-      case "failed":
-      case "closed":
+    switch (peerConnection.connectionState) {
+      case 'disconnected':
+      case 'failed':
+      case 'closed':
         console.log('Received close event');
         closeDatachannel();
         break;
@@ -135,7 +136,10 @@ function beforeAnswer(peerConnection) {
   peerConnection.addEventListener('datachannel', onDataChannel);
 }
 
-createExample('datachannel-buffer-limits', description, { beforeAnswer, RTCPeerConnection: window.RTCPeerConnection });
+createExample('datachannel-buffer-limits', description, {
+  beforeAnswer,
+  RTCPeerConnection: window.RTCPeerConnection,
+});
 
 const dataSizeLabel = document.createElement('label');
 dataSizeLabel.innerText = 'Data size to send (MBytes):';

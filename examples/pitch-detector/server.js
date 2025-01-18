@@ -1,8 +1,9 @@
 'use strict';
 
-const { RTCAudioSink } = require('wrtc').nonstandard;
+import { nonstandard } from 'wrtc';
+const { RTCAudioSink } = nonstandard;
 
-const PitchDetector = require('../../lib/common/pitchdetector');
+import PitchDetector from '../../lib/common/pitchdetector.js';
 
 function beforeOffer(peerConnection) {
   const { track } = peerConnection.addTransceiver('audio').receiver;
@@ -24,10 +25,10 @@ function beforeOffer(peerConnection) {
   // RTCPeerConnection is closed. In the future, we can subscribe to
   // "connectionstatechange" events.
   const { close } = peerConnection;
-  peerConnection.close = function() {
+  peerConnection.close = function () {
     sink.stop();
     return close.apply(this, arguments);
   };
 }
 
-module.exports = { beforeOffer };
+export default { beforeOffer };

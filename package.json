@@ -4,6 +4,7 @@
   "description": "This project presents a few example applications using node-webrtc.",
   "private": true,
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "lint": "eslint index.js examples lib test",
     "start": "node index.js",
@@ -19,20 +20,28 @@
   "license": "BSD-3-Clause",
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.0.20",
-    "Scope": "github:kevincennis/Scope",
+    "@roamhq/wrtc": "^0.8.0",
     "body-parser": "^1.18.3",
     "browserify-middleware": "^8.1.1",
-    "canvas": "^2.4.1",
+    "canvas": "^3.0.1",
     "color-space": "^1.16.0",
     "express": "^4.16.4",
     "fluent-ffmpeg": "^2.1.2",
     "fluent-ffmpeg-multistream": "^1.0.0",
     "node-fetch": "^2.3.0",
+    "Scope": "github:kevincennis/Scope",
     "uuid": "^3.3.2",
-    "wrtc": "^0.4.3"
+    "vite": "^5.0.12",
+    "vite-express": "^0.13.0"
   },
   "devDependencies": {
-    "eslint": "^5.15.1",
-    "tape": "^4.10.0"
+    "@eslint/js": "^9.18.0",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.1",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2",
+    "tape": "^5.9.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0"
   }
 }

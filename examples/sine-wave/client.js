@@ -1,13 +1,17 @@
 /* global Scope */
 'use strict';
 
-require('Scope/dist/Scope.js');
+import 'Scope/dist/Scope.js';
 
-const createExample = require('../../lib/browser/example');
-const { acquireAudioContext, releaseAudioContext } = require('../../lib/browser/webaudio/refcountedaudiocontext');
-const PitchDetector = require('../../lib/common/pitchdetector');
+import createExample from '../../lib/browser/example.js';
+import {
+  acquireAudioContext,
+  releaseAudioContext,
+} from '../../lib/browser/webaudio/refcountedaudiocontext.js';
+import PitchDetector from '../../lib/common/pitchdetector.js';
 
-const description = 'This example uses node-webrtc&rsquo;s RTCAudioSource to \
+const description =
+  'This example uses node-webrtc&rsquo;s RTCAudioSource to \
 generate a sine wave server-side. Use the number input to change the frequency \
 of the server-generated sine wave. Frequency changes are sent to the server \
 using RTCDataChannel. Finally, pitch is detected client-side and displayed \
@@ -25,7 +29,9 @@ detectedFrequency.innerText = 'Detected Frequency:';
 async function beforeAnswer(peerConnection) {
   const audioContext = acquireAudioContext();
 
-  const remoteStream = new MediaStream(peerConnection.getReceivers().map(receiver => receiver.track));
+  const remoteStream = new MediaStream(
+    peerConnection.getReceivers().map((receiver) => receiver.track)
+  );
 
   const remoteAudio = document.createElement('audio');
   remoteAudio.srcObject = remoteStream;
@@ -50,7 +56,7 @@ async function beforeAnswer(peerConnection) {
       samples: bytes,
       bitsPerSample: 8,
       sampleRate: audioContext.sampleRate,
-      unsigned: true
+      unsigned: true,
     };
     analyser.getByteTimeDomainData(bytes);
     const frequency = pitchDetector.onData(data);
@@ -81,7 +87,7 @@ async function beforeAnswer(peerConnection) {
   // RTCPeerConnection is closed. In the future, we can subscribe to
   // "connectionstatechange" events.
   const { close } = peerConnection;
-  peerConnection.close = function() {
+  peerConnection.close = function () {
     frequencyInput.removeEventListener('change', onChange);
     peerConnection.removeEventListener('datachannel', onDataChannel);
 

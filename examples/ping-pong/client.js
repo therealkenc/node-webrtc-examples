@@ -1,8 +1,9 @@
 'use strict';
 
-const createExample = require('../../lib/browser/example');
+import createExample from '../../lib/browser/example.js';
 
-const description = 'This example sends a &ldquo;ping&rdquo; from the client \
+const description =
+  'This example sends a &ldquo;ping&rdquo; from the client \
 over an RTCDataChannel. Upon receipt, node-webrtc responds with a \
 &ldquo;pong&rdquo;. Open the Console to see the pings and pongs&hellip;';
 
@@ -36,7 +37,7 @@ function beforeAnswer(peerConnection) {
   // RTCPeerConnection is closed. In the future, we can subscribe to
   // "connectionstatechange" events.
   const { close } = peerConnection;
-  peerConnection.close = function() {
+  peerConnection.close = function () {
     if (dataChannel) {
       dataChannel.removeEventListener('message', onMessage);
     }

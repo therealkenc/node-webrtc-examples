@@ -1,13 +1,17 @@
 /* global Scope */
 'use strict';
 
-require('Scope/dist/Scope.js');
+import 'Scope/dist/Scope.js';
 
-const createExample = require('../../lib/browser/example');
-const { acquireAudioContext, releaseAudioContext } = require('../../lib/browser/webaudio/refcountedaudiocontext');
-const WebAudioOscillatorNodeSineWave = require('../../lib/browser/webaudio/webaudiooscillatornodesinewave');
+import createExample from '../../lib/browser/example';
+import {
+  acquireAudioContext,
+  releaseAudioContext,
+} from '../../lib/browser/webaudio/refcountedaudiocontext';
+import WebAudioOscillatorNodeSineWave from '../../lib/browser/webaudio/webaudiooscillatornodesinewave.js';
 
-const description = 'This example uses node-webrtc&rsquo;s RTCAudioSink to \
+const description =
+  'This example uses node-webrtc&rsquo;s RTCAudioSink to \
 implement simple pitch detection server-side. The client generates a sine \
 wave, and the server communicates the pitch it detects using RTCDataChannel. \
 Use the number input to change the frequency of the client-generated sine \
@@ -25,7 +29,7 @@ detectedFrequency.innerText = 'Detected Frequency:';
 function beforeAnswer(peerConnection) {
   const audioContext = acquireAudioContext();
   const webAudioSineWave = new WebAudioOscillatorNodeSineWave({
-    frequency: frequencyInput.value
+    frequency: frequencyInput.value,
   });
 
   function onChange() {
@@ -38,7 +42,7 @@ function beforeAnswer(peerConnection) {
   const streamNode = audioContext.createMediaStreamDestination();
   webAudioSineWave.node.connect(streamNode);
   const { stream } = streamNode;
-  stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
+  stream.getTracks().forEach((track) => peerConnection.addTrack(track, stream));
 
   const canvas = document.createElement('canvas');
   const scope = new Scope(audioContext, canvas);
@@ -67,14 +71,14 @@ function beforeAnswer(peerConnection) {
   // RTCPeerConnection is closed. In the future, we can subscribe to
   // "connectionstatechange" events.
   const { close } = peerConnection;
-  peerConnection.close = function() {
+  peerConnection.close = function () {
     frequencyInput.removeEventListener('change', onChange);
 
     canvas.remove();
     scope.stop();
     webAudioSineWave.node.disconnect(scope.input);
 
-    stream.getTracks().forEach(track => track.stop());
+    stream.getTracks().forEach((track) => track.stop());
     webAudioSineWave.node.disconnect(streamNode);
     webAudioSineWave.close();
     releaseAudioContext();

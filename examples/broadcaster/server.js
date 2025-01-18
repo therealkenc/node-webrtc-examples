@@ -1,28 +1,30 @@
 'use strict';
 
-const { EventEmitter } = require('events');
+import { EventEmitter } from 'events';
 
 const broadcaster = new EventEmitter();
 const { on } = broadcaster;
 
 function beforeOffer(peerConnection) {
-  const audioTrack = broadcaster.audioTrack = peerConnection.addTransceiver('audio').receiver.track;
-  const videoTrack = broadcaster.videoTrack = peerConnection.addTransceiver('video').receiver.track;
+  const audioTrack = (broadcaster.audioTrack =
+    peerConnection.addTransceiver('audio').receiver.track);
+  const videoTrack = (broadcaster.videoTrack =
+    peerConnection.addTransceiver('video').receiver.track);
 
   broadcaster.emit('newBroadcast', {
     audioTrack,
-    videoTrack
+    videoTrack,
   });
 
   const { close } = peerConnection;
-  peerConnection.close = function() {
-    audioTrack.stop()
-    videoTrack.stop()
+  peerConnection.close = function () {
+    audioTrack.stop();
+    videoTrack.stop();
     return close.apply(this, arguments);
   };
 }
 
-module.exports = { 
+export default {
   beforeOffer,
-  broadcaster
+  broadcaster,
 };
