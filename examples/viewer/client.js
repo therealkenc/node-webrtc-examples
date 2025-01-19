@@ -1,6 +1,6 @@
 'use strict';
 
-import createExample from '../../lib/browser/example.js';
+import { createExample } from '../../lib/browser/example.js';
 
 const description =
   'View a broadcast. You should have already started the \

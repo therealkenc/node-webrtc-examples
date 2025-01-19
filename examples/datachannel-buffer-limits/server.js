@@ -25,7 +25,7 @@ function beforeOffer(peerConnection) {
       console.log(`uploadedBytesTotal : ${uploadedBytesTotal}`);
 
       const queueStartTime = Date.now();
-      const chunkSizeInBytes = chunkSize*1024;
+      const chunkSizeInBytes = chunkSize * 1024;
 
       const loops = uploadedBytesTotal / chunkSizeInBytes;
       const rem = uploadedBytesTotal % chunkSizeInBytes;
@@ -45,9 +45,8 @@ function beforeOffer(peerConnection) {
         const queueDuration = Date.now() - queueStartTime;
 
         dataChannel.send('#STOP ' + queueDuration);
-        console.log(`Data sent back to client, queueDuration : ${queueDuration} ms`)
-
-      } catch(e) {
+        console.log(`Data sent back to client, queueDuration : ${queueDuration} ms`);
+      } catch (e) {
         console.log('Failed to send data :', e);
         dataChannel.removeEventListener('message', onMessage);
         dataChannel.close();
@@ -60,11 +59,11 @@ function beforeOffer(peerConnection) {
     uploadedBytesTotal += Buffer.byteLength(data);
   }
 
-  function onConnectionStateChange(event) {
-    switch(peerConnection.connectionState) {
-      case "disconnected":
-      case "failed":
-      case "closed":
+  function onConnectionStateChange(_event) {
+    switch (peerConnection.connectionState) {
+      case 'disconnected':
+      case 'failed':
+      case 'closed':
         console.log('Received close event');
         dataChannel.removeEventListener('message', onMessage);
         dataChannel.close();
@@ -76,4 +75,4 @@ function beforeOffer(peerConnection) {
   peerConnection.addEventListener('connectionstatechange', onConnectionStateChange);
 }
 
-module.exports = { beforeOffer };
+export { beforeOffer };

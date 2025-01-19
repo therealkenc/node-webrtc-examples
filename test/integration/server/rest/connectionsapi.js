@@ -3,7 +3,6 @@
 import bodyParser from 'body-parser';
 const { json } = bodyParser;
 import express from 'express';
-import fetch from 'node-fetch';
 import tape from 'tape';
 
 import { WebRtcConnection } from '../../../../lib/server/connections/webrtcconnection.js';

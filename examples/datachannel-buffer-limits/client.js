@@ -1,6 +1,6 @@
 'use strict';
 
-import createExample from '../../lib/browser/example.js';
+import { createExample } from '../../lib/browser/example.js';
 
 const description =
   'This example sends a given amount of data from the client \
@@ -121,7 +121,7 @@ function beforeAnswer(peerConnection) {
     }, 200);
   }
 
-  function onConnectionStateChange(event) {
+  function onConnectionStateChange(_event) {
     switch (peerConnection.connectionState) {
       case 'disconnected':
       case 'failed':

@@ -15,10 +15,10 @@ function beforeOffer(peerConnection) {
   // RTCPeerConnection is closed. In the future, we can subscribe to
   // "connectionstatechange" events.
   const { close } = peerConnection;
-  peerConnection.close = function() {
+  peerConnection.close = function () {
     dataChannel.removeEventListener('message', onMessage);
     return close.apply(this, arguments);
   };
 }
 
-module.exports = { beforeOffer };
+export { beforeOffer };

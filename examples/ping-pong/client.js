@@ -1,6 +1,6 @@
 'use strict';
 
-import createExample from '../../lib/browser/example.js';
+import { createExample } from '../../lib/browser/example.js';
 
 const description =
   'This example sends a &ldquo;ping&rdquo; from the client \

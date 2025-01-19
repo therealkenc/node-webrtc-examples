@@ -1,9 +1,10 @@
 'use strict';
 
-import { nonstandard } from 'wrtc';
+import wrtc from '@roamhq/wrtc';
+const { nonstandard } = wrtc;
 const { RTCAudioSink } = nonstandard;
 
-import PitchDetector from '../../lib/common/pitchdetector.js';
+import { PitchDetector } from '../../lib/common/pitchdetector.js';
 
 function beforeOffer(peerConnection) {
   const { track } = peerConnection.addTransceiver('audio').receiver;

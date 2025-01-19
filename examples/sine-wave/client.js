@@ -3,12 +3,12 @@
 
 import 'Scope/dist/Scope.js';
 
-import createExample from '../../lib/browser/example.js';
+import { createExample } from '../../lib/browser/example.js';
 import {
   acquireAudioContext,
   releaseAudioContext,
 } from '../../lib/browser/webaudio/refcountedaudiocontext.js';
-import PitchDetector from '../../lib/common/pitchdetector.js';
+import { PitchDetector } from '../../lib/common/pitchdetector.js';
 
 const description =
   'This example uses node-webrtc&rsquo;s RTCAudioSource to \

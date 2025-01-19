@@ -3,13 +3,15 @@
 import { PassThrough } from 'stream';
 import { unlinkSync } from 'fs';
 
-import { nonstandard } from 'wrtc';
-const { RTCAudioSink, RTCVideoSink } = nonstandard;
+import wrtc from '@roamhq/wrtc';
+const { RTCAudioSink, RTCVideoSink } = wrtc.nonstandard;
 
 import { path as ffmpegPath } from '@ffmpeg-installer/ffmpeg';
-import ffmpeg, { setFfmpegPath } from 'fluent-ffmpeg';
+import ffmpeg from 'fluent-ffmpeg';
+const { setFfmpegPath } = ffmpeg;
 setFfmpegPath(ffmpegPath);
-import { StreamInput } from 'fluent-ffmpeg-multistream';
+import ffmpegMultistream from 'fluent-ffmpeg-multistream';
+const { StreamInput } = ffmpegMultistream;
 
 const VIDEO_OUTPUT_SIZE = '320x240';
 const VIDEO_OUTPUT_FILE = './recording.mp4';
@@ -87,7 +89,7 @@ function beforeOffer(peerConnection) {
     audioSink.stop();
     videoSink.stop();
 
-    streams.forEach(({ audio, video, end, proc, recordPath }) => {
+    streams.forEach(({ audio, video, end, _proc, _recordPath }) => {
       if (!end) {
         if (audio) {
           audio.end();

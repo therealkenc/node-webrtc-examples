@@ -1,6 +1,6 @@
 'use strict';
 
-import createExample from '../../lib/browser/example.js';
+import { createExample } from '../../lib/browser/example.js';
 
 const description =
   'Transcode and record audio and video into different video resolutions and then merge into single file.';

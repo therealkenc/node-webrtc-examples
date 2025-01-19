@@ -1,10 +1,13 @@
 'use strict';
 
 import { createCanvas, createImageData } from 'canvas';
-import { hsv } from 'color-space';
+
+import space from 'color-space';
+const { hsv } = space;
 import { performance } from 'perf_hooks';
 
-import { nonstandard } from 'wrtc';
+import wrtc from '@roamhq/wrtc';
+const { nonstandard } = wrtc;
 const { RTCVideoSink, RTCVideoSource, i420ToRgba, rgbaToI420 } = nonstandard;
 
 const width = 640;

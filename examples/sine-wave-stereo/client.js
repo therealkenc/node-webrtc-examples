@@ -3,7 +3,7 @@
 
 import 'Scope/dist/Scope.js';
 
-import createExample from '../../lib/browser/example.js';
+import { createExample } from '../../lib/browser/example.js';
 import {
   acquireAudioContext,
   releaseAudioContext,

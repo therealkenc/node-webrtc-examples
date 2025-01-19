@@ -1,6 +1,6 @@
 'use strict';
 
-import createExample from '../../lib/browser/example.js';
+import { createExample } from '../../lib/browser/example.js';
 
 const description =
   'This example simply relays incoming audio and video using \

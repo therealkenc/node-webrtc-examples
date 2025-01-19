@@ -1,6 +1,6 @@
 'use strict';
 
-import RTCAudioSourceSineWave from '../../lib/server/webrtc/rtcaudiosourcesinewave.js';
+import { RTCAudioSourceSineWave } from '../../lib/server/webrtc/rtcaudiosourcesinewave.js';
 
 function beforeOffer(peerConnection) {
   const source = new RTCAudioSourceSineWave({

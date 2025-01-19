@@ -3,12 +3,12 @@
 
 import 'Scope/dist/Scope.js';
 
-import createExample from '../../lib/browser/example';
+import { createExample } from '../../lib/browser/example.js';
 import {
   acquireAudioContext,
   releaseAudioContext,
-} from '../../lib/browser/webaudio/refcountedaudiocontext';
-import WebAudioOscillatorNodeSineWave from '../../lib/browser/webaudio/webaudiooscillatornodesinewave.js';
+} from '../../lib/browser/webaudio/refcountedaudiocontext.js';
+import { WebAudioOscillatorNodeSineWave } from '../../lib/browser/webaudio/webaudiooscillatornodesinewave.js';
 
 const description =
   'This example uses node-webrtc&rsquo;s RTCAudioSink to \

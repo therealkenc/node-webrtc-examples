@@ -3,7 +3,7 @@
 import { EventEmitter } from 'events';
 
 const broadcaster = new EventEmitter();
-const { on } = broadcaster;
+//const { on } = broadcaster;
 
 function beforeOffer(peerConnection) {
   const audioTrack = (broadcaster.audioTrack =

@@ -5,8 +5,8 @@ function beforeOffer(peerConnection) {
   const videoTransceiver = peerConnection.addTransceiver('video');
   return Promise.all([
     audioTransceiver.sender.replaceTrack(audioTransceiver.receiver.track),
-    videoTransceiver.sender.replaceTrack(videoTransceiver.receiver.track)
+    videoTransceiver.sender.replaceTrack(videoTransceiver.receiver.track),
   ]);
 }
 
-module.exports = { beforeOffer };
+export { beforeOffer };
