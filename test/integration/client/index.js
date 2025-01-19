@@ -6,7 +6,7 @@ const { json } = bodyParser;
 import express from 'express';
 import tape from 'tape';
 
-import { ConnectionClient } from '../../../lib/client/index.js';
+import { ConnectionClient } from '../../../lib/client/index-integration.js';
 import { WebRtcConnectionManager } from '../../../lib/server/connections/webrtcconnectionmanager.js';
 import { connectionsApi } from '../../../lib/server/rest/connectionsapi.js';
 
